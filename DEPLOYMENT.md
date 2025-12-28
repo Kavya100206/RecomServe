@@ -58,7 +58,8 @@ git push -u origin main
    - **Region**: Same as database
    - **Branch**: `main`
    - **Root Directory**: `ml-service`
-   - **Runtime**: `Docker`
+   - **Runtime**: `Docker` ⚠️ **CRITICAL: Must be Docker, not Python!**
+   - **Dockerfile Path**: `Dockerfile` (should auto-detect)
    - **Plan**: **Free**
 
 4. **Environment Variables**:
@@ -75,6 +76,8 @@ git push -u origin main
      python import_movielens.py
      python app/train.py
      ```
+
+> **Note**: If you accidentally selected Python runtime, go to Settings > Build & Deploy > Change Runtime to `Docker` > Save > Manual Deploy
 
 ---
 
@@ -187,6 +190,20 @@ Run setup commands in Shell:
 python import_movielens.py
 python app/train.py
 ```
+
+### Python Version Error (scikit-surprise)
+
+**Error**: `error: subprocess-exited-with-error` with Cython compilation errors
+
+**Cause**: Render is using Python runtime instead of Docker runtime
+
+**Solution**:
+1. Go to your ML service in Render
+2. Click **Settings** > **Build & Deploy**
+3. Change **Runtime** to `Docker`
+4. Click **Manual Deploy** > **Deploy latest commit**
+
+**Alternative**: If the issue persists, the codebase has been updated to remove `scikit-surprise` dependency (it wasn't being used)
 
 ---
 
