@@ -4,7 +4,6 @@ import morgan from 'morgan';
 import { config } from './config/config.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 import pool from './config/database.js';
-import redis from './services/redisService.js';
 
 const app = express();
 
@@ -24,16 +23,12 @@ app.get('/health', async (req, res) => {
         // Check database connection
         await pool.query('SELECT 1');
 
-        // Check Redis connection
-        await redis.ping();
-
         res.json({
             success: true,
             message: 'Server is healthy',
             timestamp: new Date().toISOString(),
             services: {
                 database: 'connected',
-                redis: 'connected',
             },
         });
     } catch (error) {
