@@ -25,7 +25,7 @@ Scalable recommendation engine with microservices architecture, handling cold-st
 
 **Live Application:** [https://recomserve-frontend.onrender.com](https://recomserve-frontend.onrender.com)
 
-### Demo User IDs
+### Demo User IDs (Sample)
 
 Copy and paste these UUIDs to try different user profiles:
 
@@ -71,7 +71,7 @@ Copy and paste these UUIDs to try different user profiles:
 ### Technology Stack
 
 **ML Service**
-- **Language**: Python 3.8+
+- **Language**: Python 3.10
 - **Framework**: FastAPI
 - **ML Library**: scikit-learn (NMF)
 - **Data Processing**: pandas, NumPy
@@ -95,7 +95,7 @@ Copy and paste these UUIDs to try different user profiles:
 
 ```bash
 # 1. Clone and setup
-git clone https://github.com/yourusername/RecomServe.git
+git clone https://github.com/Kavya100206/RecomServe.git
 cd RecomServe/recommendation-system
 
 # 2. Database
@@ -191,7 +191,7 @@ Visit `http://localhost`
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) for step-by-step Render deployment guide.
 
-**Quick**: Push to GitHub, connect to Render, deploy database + 3 services (~30 min)
+**Quick**: Push to GitHub, connect to Render, deploy database and services (~30 min)
 
 ---
 
@@ -205,7 +205,3 @@ pytest tests/ -v
 8 tests covering validation, cold start, edge cases (100% pass rate)
 
 ---
-
-## Contact
-
-For questions or issues, open a GitHub issue.
