@@ -44,11 +44,13 @@ app.get('/health', async (req, res) => {
 import userRoutes from './routes/userRoutes.js';
 import contentRoutes from './routes/contentRoutes.js';
 import eventRoutes from './routes/eventRoutes.js';
+import recommendationRoutes from './routes/recommendationRoutes.js';
 
 // API Routes
 app.use('/api/users', userRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/events', eventRoutes);
+app.use('/api/recommendations', recommendationRoutes);
 
 // 404 handler
 app.use(notFoundHandler);
