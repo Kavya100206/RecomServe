@@ -3,8 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 
 # Import routes
-from routes.recommendations import router as recommendation_router
-from services.recommendation_service import recommendation_service
+from .routes.recommendations import router as recommendation_router
+from .services.recommendation_service import recommendation_service
 
 app = FastAPI(
     title="ML Recommendation Service",
