@@ -1,0 +1,80 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+ENV/
+
+# Environment variables (CRITICAL - DON'T COMMIT!)
+.env
+.env.local
+.env.production
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Database
+*.db
+*.sqlite
+
+# ML Models & Data
+ml-service/models/*.pkl
+ml-service/models/*.joblib
+ml-service/saved_models/*.pkl
+ml-service/saved_models/*.joblib
+ml-service/datasets/
+ml-service/datasets/ml-100k/
+
+# Debug & Test Scripts (keep import_movielens.py, tests/)
+ml-service/debug_*.py
+ml-service/quick*.py
+ml-service/test_*.py
+ml-service/enrichment_output.txt
+!ml-service/tests/
+
+# Frontend
+frontend/my-react-app/dist/
+frontend/my-react-app/.vite/
+frontend/vite-project/
+frontend/node_modules/
+
+# Docker
+.dockerignore
+
+# Testing
+coverage/
+.pytest_cache/
+.coverage
+*.cover
+htmlcov/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+~*
