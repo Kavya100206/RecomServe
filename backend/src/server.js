@@ -10,6 +10,9 @@ const app = express();
 // Import middleware
 import { apiLimiter } from './middleware/rateLimiter.js';
 
+// Trust proxy - required for rate limiting behind Render's proxy
+app.set('trust proxy', 1);
+
 // Middleware
 app.use(cors()); // Enable CORS
 app.use(express.json()); // Parse JSON bodies
