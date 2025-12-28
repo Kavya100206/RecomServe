@@ -22,7 +22,7 @@ function Recommendations() {
         loadRecommendations();
     }, [userId, navigate]);
 
-    const loadRecommendations = async () => {
+    const loadRecommendations = async (retryCount = 0) => {
         setLoading(true);
         setError('');
 
@@ -35,10 +35,24 @@ function Recommendations() {
                 count: data.count,
             });
         } catch (err) {
-            setError('Failed to load recommendations. Make sure ML service is running on port 8000.');
-            console.error(err);
+            // Handle 502 errors (service sleeping) with auto-retry
+            if (err.response?.status === 502 && retryCount < 6) {
+                const waitTime = Math.min(5000 * (retryCount + 1), 15000); // 5s, 10s, 15s, etc.
+                setError(`⏳ Services are waking up... Retrying in ${waitTime / 1000} seconds (attempt ${retryCount + 1}/6)`);
+
+                setTimeout(() => {
+                    loadRecommendations(retryCount + 1);
+                }, waitTime);
+            } else if (err.response?.status === 502) {
+                setError('⚠️ Services are taking longer than expected to wake up. Please refresh the page in 30 seconds.');
+            } else {
+                setError('Failed to load recommendations. Please try again.');
+                console.error(err);
+            }
         } finally {
-            setLoading(false);
+            if (retryCount === 0) {
+                setLoading(false);
+            }
         }
     };
 
