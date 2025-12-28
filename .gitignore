@@ -65,6 +65,7 @@ frontend/node_modules/
 
 # Docker
 .dockerignore
+docker-compose.override.yml
 
 # Testing
 coverage/
