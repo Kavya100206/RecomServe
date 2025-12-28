@@ -21,6 +21,28 @@ Scalable recommendation engine with microservices architecture, handling cold-st
 
 ---
 
+## 🎯 Try the Live Demo
+
+**Live Application:** [https://recomserve-frontend.onrender.com](https://recomserve-frontend.onrender.com)
+
+### Demo User IDs
+
+Copy and paste these UUIDs to try different user profiles:
+
+| UUID | Profile | Preferences |
+|------|---------|-------------|
+| `004deb95-9cc2-43e6-8445-14faae27a12f` | Sci-Fi Enthusiast | Action, Thriller, Mind-bending |
+| `12345678-1234-1234-1234-123456789012` | Drama Lover | Hope, Character-driven stories |
+| `23456789-2345-2345-2345-234567890123` | Crime Fan | Mafia, Thrillers, Dark themes |
+
+### ⚠️ Important Notes
+
+- **First Load (Cold Start)**: Services may take 30 seconds to wake up on first request (free tier limitation). Subsequent requests are instant!
+- **Auto-Sleep**: Free tier services sleep after 15 minutes of inactivity
+- **Data**: Demo uses curated movie recommendations from seed data
+
+---
+
 ## Architecture
 
 ### System Components
