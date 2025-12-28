@@ -1,13 +1,14 @@
 import axios from 'axios';
 
-const ML_API_BASE = 'http://localhost:8000';
+// Use backend API URL from environment variable (Render) or localhost for development
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 class APIService {
     // Get recommendations for a user
     async getRecommendations(userId, count = 10) {
         try {
             const response = await axios.get(
-                `${ML_API_BASE}/recommendations/${userId}?n=${count}`
+                `${API_BASE}/api/recommendations/${userId}?n=${count}`
             );
             return response.data;
         } catch (error) {
@@ -20,7 +21,7 @@ class APIService {
     async getModelInfo() {
         try {
             const response = await axios.get(
-                `${ML_API_BASE}/recommendations/model/info`
+                `${API_BASE}/api/model/info`
             );
             return response.data;
         } catch (error) {
