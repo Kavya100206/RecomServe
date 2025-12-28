@@ -7,9 +7,48 @@ import sys
 import psycopg2
 from pathlib import Path
 
+def init_schema():
+    """Initialize database schema"""
+    print("=" * 80)
+    print("🗄️  INITIALIZING DATABASE SCHEMA")
+    print("=" * 80)
+    
+    try:
+        db_url = os.getenv('DATABASE_URL')
+        if not db_url:
+            print("❌ DATABASE_URL not set")
+            return False
+            
+        conn = psycopg2.connect(db_url)
+        cursor = conn.cursor()
+        
+        # Read and execute schema
+        schema_file = Path(__file__).parent.parent / 'database' / 'schema.sql'
+        
+        if not schema_file.exists():
+            print(f"❌ Schema file not found: {schema_file}")
+            return False
+            
+        with open(schema_file, 'r') as f:
+            schema_sql = f.read()
+            
+        cursor.execute(schema_sql)
+        conn.commit()
+        
+        print(f"✅ Database schema created successfully!")
+        
+        cursor.close()
+        conn.close()
+        return True
+        
+    except Exception as e:
+        print(f"⚠️  Schema initialization: {e}")
+        print("   (This is OK if schema already exists)")
+        return True  # Continue anyway
+
 def seed_database():
     """Load seed data into database"""
-    print("=" * 80)
+    print("\n" + "=" * 80)
     print("🌱 SEEDING DATABASE")
     print("=" * 80)
     
@@ -65,8 +104,12 @@ def train_model():
     print("=" * 80)
     
     try:
+        # Add app directory to path for imports
+        app_dir = Path(__file__).parent / 'app'
+        sys.path.insert(0, str(app_dir))
+        
         # Import and run training
-        from app.train import ModelTrainer
+        from train import ModelTrainer
         
         trainer = ModelTrainer()
         user_item_matrix, ratings_df = trainer.prepare_data()
@@ -91,14 +134,17 @@ if __name__ == "__main__":
     print("🚀 RENDER DEPLOYMENT SETUP")
     print("=" * 80)
     
-    # Step 1: Seed database
+    # Step 1: Initialize schema
+    init_schema()
+    
+    # Step 2: Seed database
     seed_success = seed_database()
     
     if not seed_success:
         print("\n⚠️  Database seeding failed, but continuing...")
         print("   Model will work with existing data if any")
     
-    # Step 2: Train model
+    # Step 3: Train model
     train_success = train_model()
     
     if not train_success:
