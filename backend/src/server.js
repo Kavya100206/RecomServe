@@ -18,7 +18,7 @@ app.use(cors()); // Enable CORS
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(morgan('dev')); // HTTP request logger
-app.use('/api/', apiLimiter); // Rate limiting for all API routes (100 req/15min, can be overridden by route-specific limiters)
+// Note: Rate limiting is applied per-route, not globally
 
 // Health check endpoint
 app.get('/health', async (req, res) => {
@@ -49,11 +49,11 @@ import contentRoutes from './routes/contentRoutes.js';
 import eventRoutes from './routes/eventRoutes.js';
 import recommendationRoutes from './routes/recommendationRoutes.js';
 
-// API Routes
-app.use('/api/users', userRoutes);
-app.use('/api/content', contentRoutes);
-app.use('/api/events', eventRoutes);
-app.use('/api/recommendations', recommendationRoutes);
+// API Routes (with route-specific rate limiting)
+app.use('/api/users', apiLimiter, userRoutes);
+app.use('/api/content', apiLimiter, contentRoutes);
+app.use('/api/events', apiLimiter, eventRoutes);
+app.use('/api/recommendations', recommendationRoutes); // Uses readLimiter internally (200 req/15min)
 
 // 404 handler
 app.use(notFoundHandler);
