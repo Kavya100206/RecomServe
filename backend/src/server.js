@@ -18,7 +18,7 @@ app.use(cors()); // Enable CORS
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(morgan('dev')); // HTTP request logger
-app.use('/api/', apiLimiter); // Rate limiting for all API routes
+app.use('/api/', apiLimiter); // Rate limiting for all API routes (100 req/15min, can be overridden by route-specific limiters)
 
 // Health check endpoint
 app.get('/health', async (req, res) => {

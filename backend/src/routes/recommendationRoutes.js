@@ -1,8 +1,13 @@
 import express from 'express';
 import axios from 'axios';
 import { config } from '../config/config.js';
+import { readLimiter } from '../middleware/rateLimiter.js';
 
 const router = express.Router();
+
+// Apply more lenient rate limiting for read operations
+// 200 requests per 15 minutes (vs 100 for general API)
+router.use(readLimiter);
 
 const ML_SERVICE_URL = config.mlService?.url || 'http://localhost:8000';
 
