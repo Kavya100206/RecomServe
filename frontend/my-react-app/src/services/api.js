@@ -1,7 +1,10 @@
 import axios from 'axios';
 
-// Use backend API URL from environment variable (Render) or localhost for development
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+// Use backend API URL from environment variable (Render) or fallback to production/localhost
+const API_BASE = import.meta.env.VITE_API_URL ||
+    (import.meta.env.PROD
+        ? 'https://recomserve-backend.onrender.com'
+        : 'http://localhost:3000');
 
 class APIService {
     // Get recommendations for a user
