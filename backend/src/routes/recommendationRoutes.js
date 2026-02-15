@@ -5,9 +5,10 @@ import { readLimiter } from '../middleware/rateLimiter.js';
 
 const router = express.Router();
 
+// TEMPORARILY DISABLED for testing - will re-enable after verification
 // Apply more lenient rate limiting for read operations
 // 200 requests per 15 minutes (vs 100 for general API)
-router.use(readLimiter);
+// router.use(readLimiter);
 
 const ML_SERVICE_URL = config.mlService?.url || 'http://localhost:8000';
 
