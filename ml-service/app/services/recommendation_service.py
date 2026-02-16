@@ -9,7 +9,7 @@ import os
 import uuid as uuid_lib
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
-from model_manager import ModelManager
+from app.model_manager import ModelManager
 
 
 class RecommendationService:
